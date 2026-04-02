@@ -5,12 +5,12 @@ import {
   Flame,
   Clock,
   Star,
-  Filter,
   Code2,
   Shield,
   Replace,
 } from "lucide-react";
 import ProjectCard from "@/components/project/ProjectCard";
+import CollapsibleFilters from "@/components/ui/CollapsibleFilters";
 import {
   getFilteredProjects,
   getCategories,
@@ -131,22 +131,19 @@ export default async function TrendingPage({ searchParams }: Props) {
         ))}
       </div>
 
-      {/* Extended filters */}
-      <div className="mb-8 rounded-xl border border-border bg-surface p-5">
-        <div className="flex items-center gap-2 mb-4">
-          <Filter className="h-4 w-4 text-accent" />
-          <span className="text-sm font-semibold">Filtros</span>
-          {hasFilters && (
-            <Link
-              href={currentSort === "interest" ? "/trending" : `/trending?sort=${currentSort}`}
-              className="ml-auto text-xs text-accent hover:text-accent-hover transition-colors"
-            >
-              Limpiar filtros
-            </Link>
-          )}
-        </div>
-
+      {/* Extended filters (collapsed by default) */}
+      <CollapsibleFilters hasFilters={hasFilters}>
         <div className="space-y-4">
+          {hasFilters && (
+            <div className="flex justify-end">
+              <Link
+                href={currentSort === "interest" ? "/trending" : `/trending?sort=${currentSort}`}
+                className="text-xs text-accent hover:text-accent-hover transition-colors"
+              >
+                Limpiar todos los filtros
+              </Link>
+            </div>
+          )}
           {/* Category filter */}
           <div>
             <p className="text-xs text-muted font-medium mb-2 uppercase tracking-wide">Categoría</p>
@@ -276,7 +273,7 @@ export default async function TrendingPage({ searchParams }: Props) {
             </div>
           </div>
         </div>
-      </div>
+      </CollapsibleFilters>
 
       {/* Results count */}
       <div className="flex items-center justify-between mb-6">
