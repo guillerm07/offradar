@@ -246,7 +246,7 @@ export default async function ProjectPage({ params }: Props) {
                 <Zap className="h-4 w-4 text-accent" />
               </div>
               <h3 className="text-base font-bold text-accent">
-                Replicable con Claude Code
+                Hazlo tuyo con Claude Code
               </h3>
             </div>
             <p className="text-sm leading-relaxed text-muted">
