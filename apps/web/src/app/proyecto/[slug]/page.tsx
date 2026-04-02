@@ -14,6 +14,7 @@ import {
   Zap,
   Workflow,
 } from "lucide-react";
+import Markdown from "react-markdown";
 import Badge from "@/components/ui/Badge";
 import ScoreRing from "@/components/ui/ScoreRing";
 import {
@@ -190,10 +191,8 @@ export default async function ProjectPage({ params }: Props) {
         {/* Summary */}
         <div>
           <h2 className="text-xl font-bold mb-4">Qué es {project.name}</h2>
-          <div className="prose prose-neutral dark:prose-invert max-w-none">
-            <p className="text-base leading-relaxed text-muted">
-              {project.summaryEs || project.description}
-            </p>
+          <div className="prose prose-invert max-w-none prose-headings:text-foreground prose-headings:font-bold prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3 prose-p:text-muted prose-p:leading-relaxed prose-li:text-muted prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent-hover prose-ul:my-3 prose-li:my-1">
+            <Markdown>{project.summaryEs || project.description || ""}</Markdown>
           </div>
         </div>
 
