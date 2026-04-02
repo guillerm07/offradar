@@ -13,6 +13,7 @@ import {
   Users,
 } from "lucide-react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Badge from "@/components/ui/Badge";
 import { papers, getPaperBySlug } from "@/lib/papers-data";
 
@@ -148,7 +149,7 @@ export default async function PaperDetailPage({ params }: Props) {
             prose-blockquote:border-accent prose-blockquote:bg-accent-soft/30 prose-blockquote:rounded-r-lg prose-blockquote:py-1
           "
         >
-          <Markdown>{paper.fullContent}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]}>{paper.fullContent}</Markdown>
         </div>
       </article>
 

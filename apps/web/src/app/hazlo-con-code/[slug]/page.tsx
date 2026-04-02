@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, Workflow, ExternalLink, ArrowRight } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { getAutomationBySlug, automations } from "@/lib/automations-data";
 
 type Props = {
@@ -112,7 +113,7 @@ export default async function AutomationDetailPage({ params }: Props) {
             prose-pre:bg-surface prose-pre:border prose-pre:border-border prose-pre:rounded-xl
           "
         >
-          <Markdown>{auto.fullGuide}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]}>{auto.fullGuide}</Markdown>
         </div>
       </article>
 

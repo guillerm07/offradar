@@ -15,6 +15,7 @@ import {
   Workflow,
 } from "lucide-react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Badge from "@/components/ui/Badge";
 import ScoreRing from "@/components/ui/ScoreRing";
 import {
@@ -253,7 +254,7 @@ export default async function ProjectPage({ params }: Props) {
             prose-blockquote:border-accent prose-blockquote:bg-accent-soft/30 prose-blockquote:rounded-r-lg prose-blockquote:py-1
           "
         >
-          <Markdown>{project.summaryEs || project.description || ""}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]}>{project.summaryEs || project.description || ""}</Markdown>
         </div>
       </article>
 

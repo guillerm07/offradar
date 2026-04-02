@@ -9,6 +9,7 @@ import {
   Terminal,
 } from "lucide-react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Badge from "@/components/ui/Badge";
 import { novedades, getNovedadBySlug } from "@/lib/novedades-data";
 
@@ -120,7 +121,7 @@ export default async function NovedadDetailPage({ params }: Props) {
             prose-blockquote:border-accent prose-blockquote:bg-accent-soft/30 prose-blockquote:rounded-r-lg prose-blockquote:py-1
           "
         >
-          <Markdown>{novedad.fullContent}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]}>{novedad.fullContent}</Markdown>
         </div>
       </article>
 

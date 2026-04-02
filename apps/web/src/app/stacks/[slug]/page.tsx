@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight, Layers, Clock, Zap } from "lucide-react";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Badge from "@/components/ui/Badge";
 import { stacks, getStackBySlug } from "@/lib/stacks-data";
 
@@ -179,7 +180,7 @@ export default async function StackDetailPage({ params }: Props) {
             prose-blockquote:border-accent prose-blockquote:bg-accent-soft/30 prose-blockquote:rounded-r-lg prose-blockquote:py-1
           "
         >
-          <Markdown>{stack.detailedGuide}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]}>{stack.detailedGuide}</Markdown>
         </div>
       </article>
 
