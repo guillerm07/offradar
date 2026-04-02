@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { TrendingUp, Flame, Clock, Star } from "lucide-react";
 import ProjectCard from "@/components/project/ProjectCard";
-import { demoProjects } from "@/lib/demo-data";
+import { getPublishedProjects } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Trending — Proyectos tech del momento",
@@ -10,7 +10,10 @@ export const metadata: Metadata = {
     "Los repos, herramientas y productos tech que más están creciendo hoy. Actualizado automáticamente.",
 };
 
-export default function TrendingPage() {
+export const dynamic = "force-dynamic";
+
+export default async function TrendingPage() {
+  const projects = await getPublishedProjects(30);
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="mb-10">
@@ -51,7 +54,7 @@ export default function TrendingPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
-        {demoProjects.map((project, i) => (
+        {projects.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} />
         ))}
       </div>

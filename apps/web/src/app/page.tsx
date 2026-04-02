@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import ProjectCard from "@/components/project/ProjectCard";
 import NewsletterForm from "@/components/ui/NewsletterForm";
-import { demoProjects, demoCategories } from "@/lib/demo-data";
+import { getPublishedProjects, getCategories } from "@/lib/queries";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   brain: <Brain className="h-5 w-5" />,
@@ -31,8 +31,12 @@ const categoryIcons: Record<string, React.ReactNode> = {
   rocket: <Rocket className="h-5 w-5" />,
 };
 
-export default function HomePage() {
-  const topProjects = demoProjects.slice(0, 6);
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const allProjects = await getPublishedProjects(30);
+  const topProjects = allProjects.slice(0, 6);
+  const dbCategories = await getCategories();
 
   return (
     <>
@@ -137,14 +141,14 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 stagger">
-            {demoCategories.map((cat) => (
+            {dbCategories.map((cat) => (
               <Link
                 key={cat.id}
                 href={`/categoria/${cat.slug}`}
                 className="group flex items-center gap-3 rounded-xl border border-border bg-surface p-4 transition-all hover:border-accent/30 hover:shadow-md hover:shadow-accent/5"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
-                  {categoryIcons[cat.icon] || <Radar className="h-5 w-5" />}
+                  {categoryIcons[cat.icon ?? ""] || <Radar className="h-5 w-5" />}
                 </div>
                 <div className="min-w-0">
                   <p className="text-sm font-semibold truncate">{cat.name}</p>

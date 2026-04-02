@@ -22,19 +22,17 @@ import {
   getDifficultyColor,
   getDifficultyLabel,
 } from "@/lib/utils";
-import { demoProjects } from "@/lib/demo-data";
+import { getProjectBySlug } from "@/lib/queries";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-function getProject(slug: string) {
-  return demoProjects.find((p) => p.seoSlug === slug) ?? null;
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return { title: "Proyecto no encontrado" };
 
   return {
@@ -53,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
   const tags = (project.tags as string[]) || [];

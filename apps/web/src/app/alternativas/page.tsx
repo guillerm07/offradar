@@ -4,7 +4,7 @@ import { ArrowRight, Star, ExternalLink } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import ScoreRing from "@/components/ui/ScoreRing";
 import { formatNumber, getDifficultyColor, getDifficultyLabel } from "@/lib/utils";
-import { demoProjects } from "@/lib/demo-data";
+import { getAlternativeProjects } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Alternativas Open Source — Usa esto gratis en vez de pagar",
@@ -12,8 +12,10 @@ export const metadata: Metadata = {
     "Descubre las mejores alternativas open source y gratuitas a productos de pago como Zapier, ChatGPT, Google Photos y más.",
 };
 
-export default function AlternativasPage() {
-  const alternatives = demoProjects.filter((p) => p.isOssAlternative);
+export const dynamic = "force-dynamic";
+
+export default async function AlternativasPage() {
+  const alternatives = await getAlternativeProjects();
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">

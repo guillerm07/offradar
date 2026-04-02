@@ -3,19 +3,17 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import ProjectCard from "@/components/project/ProjectCard";
-import { demoProjects, demoCategories } from "@/lib/demo-data";
+import { getProjectsByCategory, getCategories, getCategoryBySlug } from "@/lib/queries";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-function getCategory(slug: string) {
-  return demoCategories.find((c) => c.slug === slug) ?? null;
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const cat = getCategory(slug);
+  const cat = await getCategoryBySlug(slug);
   if (!cat) return { title: "Categoría no encontrada" };
 
   return {
@@ -26,11 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
-  const category = getCategory(slug);
+  const category = await getCategoryBySlug(slug);
   if (!category) notFound();
 
-  // In production, filter by category from DB. For demo, show all projects.
-  const projects = demoProjects;
+  const projects = await getProjectsByCategory(category.id);
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -47,13 +44,13 @@ export default async function CategoryPage({ params }: Props) {
           {category.name}
         </h1>
         <p className="mt-2 text-muted">
-          {category.count} proyectos en esta categoría
+          {projects.length} proyectos en esta categoría
         </p>
       </div>
 
       {/* Category pills */}
       <div className="flex flex-wrap gap-2 mb-8">
-        {demoCategories.map((cat) => (
+        {(await getCategories()).map((cat) => (
           <Link
             key={cat.id}
             href={`/categoria/${cat.slug}`}
