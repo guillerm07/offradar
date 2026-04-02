@@ -1,82 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Rocket,
-  ArrowRight,
-  ExternalLink,
-  Sparkles,
-  Terminal,
-  Code,
-} from "lucide-react";
+import { ArrowRight, Rocket, Sparkles, Terminal } from "lucide-react";
 import Badge from "@/components/ui/Badge";
+import { novedades } from "@/lib/novedades-data";
 
 export const metadata: Metadata = {
   title: "Novedades — Software recién lanzado que merece tu atención",
   description:
     "Descubre software nuevo, lanzamientos recientes de Product Hunt y herramientas innovadoras que están redefiniendo categorías. Proyectos frescos que puedes clonar con código.",
 };
-
-type Novedad = {
-  name: string;
-  tagline: string;
-  category: string;
-  clonable: boolean;
-  url: string;
-  description: string;
-};
-
-const novedades: Novedad[] = [
-  {
-    name: "Bolt.new",
-    tagline:
-      "Construye apps full-stack desde un prompt, directamente en el navegador.",
-    category: "IDE con IA",
-    clonable: true,
-    url: "https://bolt.new",
-    description:
-      "Bolt.new combina un entorno de desarrollo web completo con modelos de lenguaje avanzados para generar, ejecutar y desplegar aplicaciones full-stack desde una sola instrucción en lenguaje natural. No necesitas instalar nada: todo ocurre en el navegador. Es especialmente interesante porque demuestra que el paradigma de \"prompt → app funcional\" ya es viable para prototipos y MVPs, reduciendo semanas de trabajo a minutos.",
-  },
-  {
-    name: "Cursor Rules",
-    tagline:
-      "Reglas comunitarias para Cursor IDE que mejoran las respuestas de la IA.",
-    category: "Herramientas dev",
-    clonable: true,
-    url: "https://github.com/PatrickJS/awesome-cursorrules",
-    description:
-      "Cursor Rules es un repositorio colaborativo de reglas y configuraciones para el editor Cursor que optimizan las sugerencias de IA según el stack, el lenguaje o el framework que uses. En lugar de aceptar respuestas genéricas, puedes cargar reglas específicas que contextualizan al modelo: \"usa Tailwind v4\", \"prefiere server components\", etc. Es clonable y extensible, ideal para equipos que quieren estandarizar cómo la IA les ayuda.",
-  },
-  {
-    name: "Screen Studio (alternativa open source)",
-    tagline:
-      "Grabación de pantalla con IA que auto-hace zoom y edita el vídeo.",
-    category: "Productividad",
-    clonable: true,
-    url: "https://github.com/nicehash/screenrecorder",
-    description:
-      "Las herramientas de grabación de pantalla con edición automática estaban reservadas a apps de pago como Screen Studio. Ahora, combinando OBS con pipelines de IA, puedes conseguir el mismo efecto: grabación limpia con auto-zoom inteligente en las zonas de interés, transiciones suaves y exportación en formatos optimizados para redes sociales. Es un flujo clonable con herramientas open source y scripts de post-procesado.",
-  },
-  {
-    name: "Languine",
-    tagline:
-      "Traduce tu app a 100 idiomas con un solo comando usando IA.",
-    category: "i18n / Localización",
-    clonable: true,
-    url: "https://languine.ai",
-    description:
-      "Languine automatiza la internacionalización de aplicaciones usando modelos de lenguaje. En lugar de enviar archivos JSON a traductores humanos o usar Google Translate, ejecutas un comando y Languine analiza el contexto de cada cadena para producir traducciones naturales en más de 100 idiomas. Soporta formatos estándar como JSON, YAML y archivos .po, y se integra en tu pipeline de CI/CD para que las traducciones se actualicen con cada deploy.",
-  },
-  {
-    name: "Inbox Zero",
-    tagline:
-      "Cliente de email open source con IA que categoriza, desuscribe y gestiona tu bandeja.",
-    category: "Email / Productividad",
-    clonable: true,
-    url: "https://github.com/elie222/inbox-zero",
-    description:
-      "Inbox Zero es un cliente de correo electrónico open source que usa IA para alcanzar el mítico \"bandeja vacía\". Auto-categoriza correos, identifica suscripciones innecesarias y te permite desuscribirte con un clic, sugiere respuestas y prioriza lo importante. Al ser open source, puedes alojarlo tú mismo y mantener tus datos de email privados, algo que ninguna alternativa propietaria ofrece.",
-  },
-];
 
 export default function NovedadesPage() {
   return (
@@ -103,12 +35,15 @@ export default function NovedadesPage() {
       {/* Cards */}
       <div className="space-y-6 stagger">
         {novedades.map((item) => (
-          <div
-            key={item.name}
+          <article
+            key={item.slug}
             className="rounded-2xl border border-border bg-surface p-6 sm:p-8 transition-all hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
           >
-            {/* Top row: name + badges */}
-            <div className="flex items-start justify-between gap-4">
+            {/* Top row: icon + name + badges */}
+            <div className="flex items-start gap-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                <Rocket className="h-5 w-5" />
+              </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 flex-wrap">
                   <h2 className="text-xl sm:text-2xl font-bold">
@@ -123,16 +58,24 @@ export default function NovedadesPage() {
               </div>
             </div>
 
-            {/* Description */}
-            <div className="mt-4">
-              <p className="text-sm text-foreground/80 leading-relaxed">
-                {item.description}
-              </p>
+            {/* Summary (line-clamped) */}
+            <div className="mt-4 space-y-2">
+              {item.summary
+                .split("\n\n")
+                .slice(0, 3)
+                .map((paragraph, i) => (
+                  <p
+                    key={i}
+                    className="text-sm text-foreground/80 leading-relaxed line-clamp-3 first:line-clamp-none"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
             </div>
 
-            {/* Bottom row: clonable indicator + link */}
+            {/* Bottom row: clonable indicator + CTA */}
             <div className="mt-5 flex items-center justify-between flex-wrap gap-3">
-              {item.clonable && (
+              {item.clonableWithCode && (
                 <div className="flex items-center gap-2 rounded-lg bg-accent-soft px-3 py-1.5 border border-accent/20">
                   <Terminal className="h-3.5 w-3.5 text-accent" />
                   <span className="text-xs font-semibold text-accent">
@@ -141,17 +84,15 @@ export default function NovedadesPage() {
                 </div>
               )}
 
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-hover hover:border-accent/30"
+              <Link
+                href={`/novedades/${item.slug}`}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
               >
-                Ver proyecto
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
+                Ver análisis completo
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 

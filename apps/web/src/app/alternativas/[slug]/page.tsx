@@ -90,6 +90,13 @@ export default async function AlternativaDetailPage({ params }: Props) {
         </div>
       </div>
 
+      {/* Intro text */}
+      {product.introText && (
+        <div className="mt-8 text-muted leading-relaxed">
+          <p>{product.introText}</p>
+        </div>
+      )}
+
       {/* Alternatives */}
       <h2 className="mt-10 text-xl font-bold mb-6">
         {alternatives.length} {alternatives.length === 1 ? "alternativa open source" : "alternativas open source"}
@@ -175,6 +182,14 @@ export default async function AlternativaDetailPage({ params }: Props) {
           </div>
         ))}
       </div>
+
+      {/* Conclusion text */}
+      {product.conclusionText && (
+        <div className="mt-10 rounded-xl border border-border bg-surface p-6">
+          <h3 className="text-base font-bold mb-3">Nuestra recomendación</h3>
+          <p className="text-sm text-muted leading-relaxed">{product.conclusionText}</p>
+        </div>
+      )}
 
       {/* CTA */}
       <div className="mt-12 rounded-2xl border border-accent/20 bg-accent-soft/50 p-6 sm:p-8 text-center">

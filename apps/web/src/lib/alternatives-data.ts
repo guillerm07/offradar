@@ -6,6 +6,8 @@ export type PaidProduct = {
   price: string;
   description: string;
   whyAlternative: string;
+  introText: string;
+  conclusionText: string;
 };
 
 export const paidProducts: PaidProduct[] = [
@@ -17,6 +19,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Desde 50€/mes",
     description: "Software de escritorio remoto para controlar ordenadores a distancia, usado por empresas de soporte técnico y teletrabajadores.",
     whyAlternative: "El plan gratuito es cada vez más restrictivo: detecta \"uso comercial\" y limita sesiones a 5 minutos. Las licencias comerciales son caras para equipos pequeños. Además, todo el tráfico pasa por sus servidores, lo que puede ser un problema de privacidad.",
+    introText: "TeamViewer lleva más de 15 años dominando el mercado de escritorio remoto. Durante mucho tiempo fue la opción obvia: fácil de usar, rápido y con un plan gratuito generoso. Pero en los últimos años ha ido restringiendo el plan gratuito hasta el punto de ser prácticamente inutilizable para cualquier cosa que no sea uso personal esporádico. Las alternativas open source han madurado mucho y hoy ofrecen una experiencia igual o mejor, con la ventaja de poder montar tu propio servidor.",
+    conclusionText: "Si estás pagando TeamViewer para uso comercial, el cambio a una alternativa open source te va a ahorrar cientos de euros al año sin perder funcionalidad. Si usas el plan gratuito y te frustra la detección de \"uso comercial\", la alternativa es aún más clara: rendimiento igual o superior, sin restricciones, y con la opción de self-hosting para máxima privacidad.",
   },
   {
     slug: "google-analytics",
@@ -26,6 +30,8 @@ export const paidProducts: PaidProduct[] = [
     price: "\"Gratis\" (pagas con datos)",
     description: "La herramienta de analítica web más usada del mundo. Rastrea visitantes, fuentes de tráfico, comportamiento en la web y conversiones.",
     whyAlternative: "GA4 es excesivamente complejo para la mayoría de webs, requiere banner de cookies obligatorio por GDPR, el script de 45KB ralentiza la web, y estás regalando los datos de navegación de tus visitantes a Google para que los use en publicidad.",
+    introText: "Google Analytics ha sido el estándar de analítica web durante casi dos décadas. Con la migración forzosa a GA4, muchos propietarios de webs han descubierto que la nueva versión es significativamente más compleja, con una interfaz confusa y una curva de aprendizaje pronunciada. Además, la creciente regulación de privacidad en Europa (GDPR) hace que usar GA sin banner de cookies sea legalmente arriesgado. Las alternativas que te mostramos aquí son más simples, más rápidas, respetan la privacidad de tus visitantes y en muchos casos no necesitan banner de cookies.",
+    conclusionText: "Para el 90% de las webs, una alternativa ligera y respetuosa con la privacidad es más que suficiente. Solo necesitas Google Analytics si dependes de funciones avanzadas como embudos de conversión complejos, integración directa con Google Ads, o segmentación de audiencia detallada. Para todo lo demás, las alternativas son objetivamente mejores: más rápidas, más simples, y sin comprometer la privacidad de tus visitantes.",
   },
   {
     slug: "notion",
@@ -35,6 +41,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Gratis limitado / 10€/usuario/mes",
     description: "Workspace todo-en-uno con documentos, bases de datos, kanban, wikis y ahora IA integrada. Usado por millones de personas y equipos.",
     whyAlternative: "Tus datos viven en servidores de Notion en EEUU sin opción de self-hosting. La exportación de datos es notoriamente mala. El precio escala rápido con equipos grandes. Y si Notion cierra o cambia términos, estás atrapado.",
+    introText: "Notion ha redefinido cómo organizamos información: documentos, bases de datos, wikis y gestión de proyectos en una sola herramienta. Es brillante, pero tiene un problema fundamental: todas tus notas, ideas y datos de negocio viven en sus servidores sin posibilidad de exportación real. Las alternativas open source que han surgido en los últimos años ofrecen una experiencia muy similar con la ventaja de que tú decides dónde están tus datos.",
+    conclusionText: "Si usas Notion para notas personales y no te importa la privacidad, probablemente no necesites cambiar. Pero si gestionas datos de empresa, trabajas con información sensible, o simplemente quieres tener control sobre tus notas, las alternativas merecen una oportunidad seria. La experiencia de uso ya es comparable.",
   },
   {
     slug: "chatgpt",
@@ -44,6 +52,8 @@ export const paidProducts: PaidProduct[] = [
     price: "20$/mes (Plus) / 200$/mes (Pro)",
     description: "El chatbot de IA más popular del mundo, desarrollado por OpenAI. GPT-4 para conversaciones, análisis de documentos, generación de código y más.",
     whyAlternative: "Cuesta 20$/mes por usuario, tus conversaciones se usan para entrenar futuros modelos (salvo que pagues Pro), necesita internet permanente, y no tienes control sobre qué modelo se ejecuta ni cómo se procesan tus datos.",
+    introText: "ChatGPT cambió el mundo cuando se lanzó en noviembre de 2022. Pero depender de OpenAI para tu asistente de IA tiene costes: 20$/mes por persona, privacidad cuestionable, y dependencia total de sus servidores. Los modelos de lenguaje open source han avanzado enormemente y hoy puedes tener una experiencia de chat muy similar corriendo 100% en tu ordenador, gratis y sin que nadie lea tus conversaciones.",
+    conclusionText: "Para tareas avanzadas (razonamiento complejo, programación difícil, análisis de documentos largos), GPT-4 sigue siendo superior. Pero para el uso cotidiano — responder preguntas, redactar emails, resumir textos, generar ideas — un modelo local de 8B parámetros es sorprendentemente bueno. Y es gratis, privado e ilimitado.",
   },
   {
     slug: "airtable",
@@ -53,6 +63,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Gratis limitado / 20€/usuario/mes",
     description: "Base de datos con interfaz de hoja de cálculo. Combina la facilidad de Excel con el poder de una base de datos relacional.",
     whyAlternative: "Precio abusivo para lo que es (20€/usuario/mes en Pro), límite de 50.000 registros por base, no se conecta a tu base de datos existente, y tus datos quedan en sus servidores sin opción de self-hosting.",
+    introText: "Airtable popularizó la idea de una base de datos con cara de hoja de cálculo: potente por debajo, fácil por encima. El problema es que sus precios y límites se han vuelto insostenibles para muchos equipos. 20€ por usuario al mes por lo que en esencia es un Excel conectado es difícil de justificar, especialmente cuando las alternativas open source son genuinamente buenas y se conectan a tu base de datos existente.",
+    conclusionText: "Si ya tienes una base de datos PostgreSQL o MySQL con datos de tu negocio, la alternativa open source no es solo más barata — es objetivamente mejor, porque se conecta directamente a tu DB existente en vez de obligarte a duplicar datos en otro sitio.",
   },
   {
     slug: "capcut",
@@ -62,6 +74,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Gratis con marcas de agua / 8€/mes Pro",
     description: "Editor de vídeo de ByteDance (TikTok), el más popular para crear contenido de redes sociales. Fácil, con efectos y subtítulos automáticos.",
     whyAlternative: "Propiedad de ByteDance — toda la telemetría va a servidores chinos. Puede ser baneado si tu país restringe TikTok. Las funciones premium requieren suscripción. Y hay riesgo de dependencia de una empresa que puede cambiar las reglas.",
+    introText: "CapCut se ha convertido en el editor de vídeo más popular para contenido de redes sociales, pero su propiedad por parte de ByteDance genera preocupaciones legítimas de privacidad. Con las crecientes restricciones a TikTok en varios países, depender de CapCut para tu flujo de trabajo de creación de contenido es un riesgo real. Las alternativas open source están creciendo rápidamente y ya cubren la mayoría de casos de uso.",
+    conclusionText: "Si creas contenido para redes sociales y quieres independencia de ByteDance, las alternativas ya son viables para el 80% de los casos. Les faltan algunos efectos avanzados, pero para cortar, añadir subtítulos, transiciones y exportar en formato vertical, funcionan perfectamente.",
   },
   {
     slug: "postman",
@@ -71,6 +85,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Gratis limitado / 14$/usuario/mes",
     description: "Herramienta para probar y desarrollar APIs. Envía peticiones HTTP, gestiona colecciones, crea tests y documentación.",
     whyAlternative: "Se ha convertido en una app de 500MB que tarda en abrir, obliga a crear cuenta, sincroniza datos en su nube sin preguntar, y consume más de 1GB de RAM. Cada actualización añade funciones que nadie pidió.",
+    introText: "Postman fue una herramienta querida por desarrolladores: sencilla, rápida y gratuita. Pero se ha convertido en un software pesado que obliga a crear cuenta, consume recursos excesivos, y cada vez empuja más hacia su plan de pago. Para la mayoría de desarrolladores que simplemente necesitan enviar peticiones HTTP, es como matar moscas a cañonazos.",
+    conclusionText: "Si usas Postman solo para enviar peticiones y probar APIs (que es lo que hace el 90% de la gente), la alternativa open source es estrictamente mejor: más rápida, más ligera, sin cuenta obligatoria, y sin que tus colecciones se sincronicen a la nube de otra empresa.",
   },
   {
     slug: "salesforce",
@@ -80,6 +96,8 @@ export const paidProducts: PaidProduct[] = [
     price: "25-300€/usuario/mes",
     description: "El CRM más grande del mundo. Gestión de contactos, ventas, pipeline, marketing y servicio al cliente. Usado por grandes empresas.",
     whyAlternative: "Absurdamente caro, lento, interfaz anticuada, necesitas consultores certificados para configurarlo, y la complejidad es desproporcionada para pymes y startups.",
+    introText: "Salesforce es el CRM más grande del mundo, pero también es sinónimo de complejidad y coste excesivo. Hay una industria entera de \"consultores Salesforce\" que cobra miles de euros solo por configurar correctamente la herramienta. Para startups y pymes, hay opciones open source modernas que ofrecen el 80% de la funcionalidad con el 0% del coste.",
+    conclusionText: "Si eres una empresa grande con procesos complejos de ventas multipaís, Salesforce tiene funcionalidades que las alternativas no replican. Pero para una pyme o startup que necesita gestionar contactos, oportunidades y pipeline de ventas, pagar Salesforce es tirar el dinero.",
   },
   {
     slug: "jira",
@@ -89,6 +107,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Jira: 8€/usuario | Linear: 8$/usuario",
     description: "Herramientas de gestión de proyectos para equipos de desarrollo. Issues, sprints, kanban, roadmaps y seguimiento de bugs.",
     whyAlternative: "Jira es lento, confuso y necesita días de configuración. Linear es bonito pero no self-hosteable y cuesta 8$/usuario/mes. Ambos son un gasto significativo para equipos en crecimiento.",
+    introText: "La gestión de proyectos de software está dominada por dos extremos: Jira (potente pero pesado y confuso) y Linear (bonito pero caro y cerrado). Para equipos que quieren la experiencia moderna de Linear sin el coste ni la dependencia, las alternativas open source son cada vez más competitivas.",
+    conclusionText: "Si tu equipo está sufriendo con Jira, la alternativa open source es un alivio inmediato: interfaz moderna, rápida y sin la complejidad innecesaria. Si usas Linear y estás contento, puede que no necesites cambiar — pero si el coste empieza a pesar, aquí tienes opciones.",
   },
   {
     slug: "intercom",
@@ -98,6 +118,8 @@ export const paidProducts: PaidProduct[] = [
     price: "74-132$/asiento/mes",
     description: "Plataforma de atención al cliente con chat en vivo, email, chatbots y base de conocimiento. El estándar del sector.",
     whyAlternative: "El precio es prohibitivo: 5 agentes cuestan 370-660$/mes. Para startups y pymes es simplemente inasumible. Y tus datos de clientes quedan en sus servidores.",
+    introText: "Intercom es la referencia en atención al cliente digital: chat en vivo, chatbots, email y base de conocimiento en una sola plataforma. El problema es que sus precios son de los más altos del sector SaaS, lo que lo hace inaccesible para la mayoría de empresas que están empezando. Las alternativas open source han madurado mucho y ofrecen una experiencia muy similar para el equipo de soporte y para el cliente final.",
+    conclusionText: "Si tu startup está empezando y necesita atención al cliente multicanal, la alternativa open source te da exactamente lo mismo que Intercom a coste cero. Cuando crezcas, puedes seguir usándola o migrar a Intercom si necesitas funciones enterprise específicas. Pero muchas empresas nunca llegan a necesitar esa migración.",
   },
   {
     slug: "airdrop",
@@ -107,6 +129,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Gratis (solo Apple)",
     description: "Sistema de transferencia de archivos inalámbrica de Apple. Rápido y sin configuración, pero solo funciona entre dispositivos Apple.",
     whyAlternative: "Solo funciona entre dispositivos Apple. Si tienes un Android y un Mac, o un iPhone y un PC con Windows, AirDrop no sirve. Necesitas una alternativa que funcione entre cualquier combinación de dispositivos.",
+    introText: "AirDrop es una de las funciones más queridas del ecosistema Apple: acerca dos dispositivos, selecciona un archivo, y se transfiere al instante. El problema es que solo funciona entre dispositivos Apple. En un mundo donde la gente tiene mezclas de Android, iPhone, Mac, Windows y Linux, necesitas algo que funcione entre todo sin complicaciones.",
+    conclusionText: "La alternativa open source funciona igual de fácil que AirDrop pero entre cualquier dispositivo. Si alguna vez has intentado pasar fotos de un Android a un Mac y has acabado subiéndolas a Google Drive por desesperación, esto te va a cambiar la vida.",
   },
   {
     slug: "retool",
@@ -116,6 +140,8 @@ export const paidProducts: PaidProduct[] = [
     price: "10$/usuario/mes",
     description: "Plataforma low-code para construir herramientas internas. Conecta bases de datos y APIs, arrastra componentes UI, y despliega dashboards y paneles de admin.",
     whyAlternative: "10$ por usuario al mes se acumula rápido en equipos grandes. No es self-hosteable en el plan estándar. Y para herramientas internas que solo usa tu equipo, pagar una suscripción recurrente duele.",
+    introText: "Retool popularizó la idea de construir herramientas internas arrastrando y soltando componentes en vez de programar desde cero. Es una idea brillante, pero pagar 10$ por usuario al mes por herramientas que solo usa tu propio equipo se siente injusto. Las alternativas open source te dan la misma experiencia sin el coste recurrente.",
+    conclusionText: "Para el 90% de herramientas internas (paneles de admin, dashboards, formularios), la alternativa open source cubre todo lo necesario. Solo necesitas Retool si dependes de integraciones enterprise muy específicas o de su soporte premium.",
   },
   {
     slug: "openai-api",
@@ -125,6 +151,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Pago por uso (tokens)",
     description: "API de inteligencia artificial de OpenAI. Acceso a GPT-4, DALL-E, Whisper, embeddings y más. El estándar de facto para integrar IA en aplicaciones.",
     whyAlternative: "Pagas por cada token, los costes escalan rápido con el volumen, tus datos pasan por servidores de OpenAI, tienes rate limits, y si la API cae, tu aplicación también.",
+    introText: "La API de OpenAI es el estándar de facto para integrar inteligencia artificial en aplicaciones. Pero depender al 100% de ella tiene riesgos: costes impredecibles, datos que salen de tu infraestructura, rate limits, y puntos únicos de fallo. Las alternativas open source te permiten ejecutar modelos localmente con una API compatible, eliminando todos estos problemas de golpe.",
+    conclusionText: "Si tu aplicación procesa datos sensibles o tiene un volumen alto de peticiones, ejecutar modelos en local puede ahorrarte miles de euros al mes y darte tranquilidad en privacidad. Para prototipado rápido y calidad máxima, la API de OpenAI sigue siendo la opción más cómoda.",
   },
   {
     slug: "miro",
@@ -134,6 +162,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Miro: 8-16$/usuario | FigJam: 5$/usuario",
     description: "Pizarras digitales colaborativas para diagramas, wireframes, brainstorming y documentación visual. Muy usadas en equipos de producto y diseño.",
     whyAlternative: "Costosas para equipos grandes, lentas de cargar, y para diagramas técnicos rápidos son excesivamente complejas. A veces solo necesitas dibujar unas cajas y flechas.",
+    introText: "Miro y FigJam son herramientas de colaboración visual potentes, pero para el caso de uso más común — hacer un diagrama rápido para explicar una idea — son excesivas. Cargan lento, cuestan dinero por usuario, y la interfaz está pensada para workshops de diseño, no para bocetos técnicos rápidos. La alternativa open source es más rápida, gratuita, y el resultado visual es sorprendentemente mejor para diagramas técnicos.",
+    conclusionText: "Si necesitas workshops de diseño colaborativos con 20 personas, Miro sigue siendo difícil de superar. Pero para diagramas técnicos, wireframes rápidos y explicaciones visuales — que es el 90% de lo que la gente hace con estas herramientas — la alternativa gratuita es objetivamente mejor.",
   },
   {
     slug: "uptimerobot",
@@ -143,6 +173,8 @@ export const paidProducts: PaidProduct[] = [
     price: "Gratis limitado / 7$/mes",
     description: "Servicio de monitorización de webs y servidores. Comprueba si tus servicios están online y te avisa cuando caen.",
     whyAlternative: "El plan gratuito solo permite 50 monitores con intervalo de 5 minutos. El plan Pro cuesta 7$/mes y sigue teniendo limitaciones. Tus datos de monitorización están en sus servidores.",
+    introText: "UptimeRobot es el servicio de monitorización más conocido: simple, funcional, con un plan gratuito que ha sido suficiente para muchos durante años. Pero sus limitaciones son cada vez más evidentes: 50 monitores máximo, intervalos de 5 minutos, y la interfaz no ha evolucionado mucho. La alternativa self-hosted es superior en casi todos los aspectos.",
+    conclusionText: "Si solo tienes una o dos webs que monitorizar y el plan gratuito de UptimeRobot te vale, puede que no necesites cambiar. Pero si gestionas más servicios o quieres más control (intervalos de 20 segundos, 90+ canales de notificación, página de estado personalizable), la alternativa open source es muy superior.",
   },
 ];
 
