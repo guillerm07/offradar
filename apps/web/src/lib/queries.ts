@@ -80,6 +80,31 @@ export async function getAlternativeProjects(limit = 30) {
     .limit(limit);
 }
 
+export async function getAlternativesFor(alternativeTo: string) {
+  return db
+    .select()
+    .from(projects)
+    .where(
+      and(
+        eq(projects.status, "published"),
+        eq(projects.isOssAlternative, true),
+        eq(projects.alternativeTo, alternativeTo)
+      )
+    )
+    .orderBy(desc(projects.interestScore));
+}
+
+export async function getDistinctAlternatives() {
+  const results = await db.execute(sql`
+    SELECT alternative_to, COUNT(*)::int as count
+    FROM projects
+    WHERE is_oss_alternative = true AND status = 'published' AND alternative_to IS NOT NULL
+    GROUP BY alternative_to
+    ORDER BY count DESC, alternative_to ASC
+  `);
+  return results as unknown as Array<{ alternative_to: string; count: number }>;
+}
+
 export async function getCategories() {
   const results = await db.execute(sql`
     SELECT c.*, COUNT(p.id)::int as count

@@ -7,6 +7,7 @@ import {
   Menu,
   X,
   TrendingUp,
+  Rocket,
   Layers,
   GitCompare,
   FileText,
@@ -16,6 +17,7 @@ import SearchDialog from "@/components/ui/SearchDialog";
 
 const navigation = [
   { name: "Trending", href: "/trending", icon: TrendingUp },
+  { name: "Novedades", href: "/novedades", icon: Rocket },
   { name: "Alternativas", href: "/alternativas", icon: GitCompare },
   { name: "Stacks", href: "/stacks", icon: Layers },
   { name: "Papers", href: "/papers", icon: FileText },
