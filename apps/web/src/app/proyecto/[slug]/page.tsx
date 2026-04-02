@@ -186,64 +186,89 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="mt-10 space-y-8">
-        {/* Summary */}
-        <div>
-          <h2 className="text-xl font-bold mb-4">Qué es {project.name}</h2>
-          <div className="prose prose-invert max-w-none prose-headings:text-foreground prose-headings:font-bold prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3 prose-p:text-muted prose-p:leading-relaxed prose-li:text-muted prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent-hover prose-ul:my-3 prose-li:my-1">
-            <Markdown>{project.summaryEs || project.description || ""}</Markdown>
+      {/* Alternative banner - before content */}
+      {project.isOssAlternative && project.alternativeTo && (
+        <div className="mt-8 flex items-center gap-3 rounded-xl border border-warning/20 bg-warning/5 px-5 py-4">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-warning/10">
+            <Star className="h-5 w-5 text-warning" />
           </div>
+          <div>
+            <p className="text-sm font-semibold">
+              Alternativa open source a {project.alternativeTo}
+            </p>
+            <p className="text-xs text-muted mt-0.5">
+              Gratuita, de código abierto y self-hosteable
+            </p>
+          </div>
+          <Link
+            href="/alternativas"
+            className="ml-auto text-xs font-medium text-warning shrink-0"
+          >
+            Ver más →
+          </Link>
         </div>
+      )}
 
+      {/* Main content */}
+      <article className="mt-10">
+        <div
+          className="
+            prose prose-invert prose-lg max-w-none
+            prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
+            prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-3 prose-h2:border-b prose-h2:border-border
+            prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+            prose-p:text-[var(--muted)] prose-p:leading-[1.8] prose-p:my-4
+            prose-strong:text-foreground prose-strong:font-semibold
+            prose-ul:my-4 prose-ul:space-y-2
+            prose-ol:my-4 prose-ol:space-y-2
+            prose-li:text-[var(--muted)] prose-li:leading-[1.7]
+            prose-a:text-accent prose-a:no-underline hover:prose-a:text-accent-hover hover:prose-a:underline
+            prose-code:text-accent prose-code:bg-accent-soft prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+            prose-pre:bg-surface prose-pre:border prose-pre:border-border prose-pre:rounded-xl
+            prose-table:border-collapse
+            prose-th:border prose-th:border-border prose-th:bg-surface prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:text-sm prose-th:font-semibold prose-th:text-foreground
+            prose-td:border prose-td:border-border prose-td:px-4 prose-td:py-2 prose-td:text-sm prose-td:text-[var(--muted)]
+            prose-hr:border-border prose-hr:my-8
+            prose-blockquote:border-accent prose-blockquote:bg-accent-soft/30 prose-blockquote:rounded-r-lg prose-blockquote:py-1
+          "
+        >
+          <Markdown>{project.summaryEs || project.description || ""}</Markdown>
+        </div>
+      </article>
+
+      {/* Cards after content */}
+      <div className="mt-12 space-y-4">
         {/* Replicable with Claude Code */}
         {project.replicableWithCode && (
-          <div className="rounded-xl border border-accent/20 bg-accent-soft p-6">
+          <div className="rounded-xl border border-accent/20 bg-accent-soft/50 p-6">
             <div className="flex items-center gap-2 mb-3">
-              <Zap className="h-5 w-5 text-accent" />
-              <h3 className="text-lg font-bold text-accent">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/20">
+                <Zap className="h-4 w-4 text-accent" />
+              </div>
+              <h3 className="text-base font-bold text-accent">
                 Replicable con Claude Code
               </h3>
             </div>
-            <p className="text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted">
               {project.replicableWithCode}
             </p>
           </div>
         )}
 
-        {/* Buildable with Claude Code */}
+        {/* Hazlo con Claude Code */}
         {project.automatizableWithN8n && (
           <div className="rounded-xl border border-success/20 bg-success/5 p-6">
             <div className="flex items-center gap-2 mb-3">
-              <Workflow className="h-5 w-5 text-success" />
-              <h3 className="text-lg font-bold text-success">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-success/20">
+                <Workflow className="h-4 w-4 text-success" />
+              </div>
+              <h3 className="text-base font-bold text-success">
                 Hazlo con Claude Code
               </h3>
             </div>
-            <p className="text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted">
               {project.automatizableWithN8n}
             </p>
-          </div>
-        )}
-
-        {/* Alternative banner */}
-        {project.isOssAlternative && project.alternativeTo && (
-          <div className="rounded-xl border border-warning/20 bg-warning/5 p-6">
-            <h3 className="text-lg font-bold mb-2">
-              Alternativa open source a {project.alternativeTo}
-            </h3>
-            <p className="text-sm text-muted leading-relaxed">
-              {project.name} es una alternativa gratuita y de código abierto a{" "}
-              {project.alternativeTo}. Puedes instalarlo en tu propio servidor
-              y tener control total sobre tus datos.
-            </p>
-            <Link
-              href="/alternativas"
-              className="inline-flex items-center gap-1 mt-3 text-sm font-semibold text-warning"
-            >
-              Ver más alternativas open source
-              <ExternalLink className="h-3 w-3" />
-            </Link>
           </div>
         )}
       </div>
