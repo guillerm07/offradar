@@ -101,6 +101,11 @@ body {
   background-clip: text;
 }
 
+.prose pre code {
+  display: block;
+  padding-top: 0.25rem;
+}
+
 .glass {
   background: rgba(11, 10, 16, 0.75);
   backdrop-filter: blur(16px);
