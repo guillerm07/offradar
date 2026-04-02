@@ -1,4 +1,7 @@
-export type Novedad = {
+import fs from "fs";
+
+// Read and fully replace the novedades data file with much richer content
+const content = `export type Novedad = {
   slug: string;
   name: string;
   tagline: string;
@@ -17,8 +20,8 @@ export const novedades: Novedad[] = [
     category: "IDE con IA",
     url: "https://bolt.new",
     clonableWithCode: true,
-    summary: "Bolt.new es un entorno de desarrollo impulsado por IA donde describes lo que quieres y obtienes una aplicación funcionando en minutos. Sin instalar nada. Todo en el navegador. Desarrollado por StackBlitz, la empresa detrás de WebContainers.\n\nEs la demostración más convincente hasta la fecha de que el paradigma 'prompt → app funcional' ya es viable para prototipos, MVPs y demos. Lo que antes eran días de configuración, ahora son minutos de conversación con una IA.",
-    fullContent: `## Qué es Bolt.new y por qué está en todas partes
+    summary: "Bolt.new es un entorno de desarrollo impulsado por IA donde describes lo que quieres y obtienes una aplicación funcionando en minutos. Sin instalar nada. Todo en el navegador. Desarrollado por StackBlitz, la empresa detrás de WebContainers.\\n\\nEs la demostración más convincente hasta la fecha de que el paradigma 'prompt → app funcional' ya es viable para prototipos, MVPs y demos. Lo que antes eran días de configuración, ahora son minutos de conversación con una IA.",
+    fullContent: \`## Qué es Bolt.new y por qué está en todas partes
 
 Si has estado en Twitter tech en los últimos meses, habrás visto a gente compartiendo vídeos de apps creadas en minutos con Bolt.new. Y no son demos de juguete — son apps reales con autenticación, base de datos, rutas, componentes, y despliegue incluido.
 
@@ -76,31 +79,31 @@ Cuando estás contento, puedes desplegarlo en Netlify con un clic o descargar to
 | Proyectos existentes | Solo nuevos | Nuevos y existentes |
 | Privacidad del código | En servidores de StackBlitz | En tu máquina |
 | Despliegue | Netlify integrado | Tú decides |
-| Precio | Gratis limitado / 20$/mes | Incluido en la suscripción de Claude |
+| Precio | Gratis limitado / 20\$/mes | Incluido en la suscripción de Claude |
 
 **Mi recomendación**: usa Bolt.new cuando quieras prototipar una idea nueva rápidamente sin configurar nada. Usa Claude Code cuando trabajes en un proyecto real que va a crecer, necesitas control total, o trabajas con código existente.
 
 ## Cómo replicar la experiencia con Claude Code
 
-\`\`\`bash
+\\\`\\\`\\\`bash
 # Claude Code puede hacer lo mismo en tu terminal
 claude "Crea una app de gestión de contactos con Next.js 15,
 Tailwind CSS, SQLite con Drizzle ORM, autenticación con
 email/password, listado con búsqueda y filtros, formulario
 de creación/edición, y modo oscuro."
-\`\`\`
+\\\`\\\`\\\`
 
-Claude Code genera la estructura completa, instala dependencias, crea todos los archivos, y puedes ejecutar \`npm run dev\` inmediatamente. La diferencia es que el código está en tu disco duro, puedes usar tu editor favorito, y tienes control total sobre cada archivo.
+Claude Code genera la estructura completa, instala dependencias, crea todos los archivos, y puedes ejecutar \\\`npm run dev\\\` inmediatamente. La diferencia es que el código está en tu disco duro, puedes usar tu editor favorito, y tienes control total sobre cada archivo.
 
 ## Precio
 
 - **Gratis**: límite de mensajes y funcionalidades básicas
-- **Pro (20$/mes)**: mensajes ilimitados, modelos premium, despliegue incluido
+- **Pro (20\$/mes)**: mensajes ilimitados, modelos premium, despliegue incluido
 - **Enterprise**: para equipos, con SSO y gestión de permisos
 
 ## Veredicto
 
-Bolt.new es impresionante como demostración tecnológica y genuinamente útil para prototipos rápidos. No reemplaza a un equipo de desarrollo, pero reduce drásticamente el tiempo de "tengo una idea" a "tengo algo funcional". Si combinas Bolt.new para el prototipo inicial con Claude Code para el desarrollo serio, tienes un flujo de trabajo potentísimo.`
+Bolt.new es impresionante como demostración tecnológica y genuinamente útil para prototipos rápidos. No reemplaza a un equipo de desarrollo, pero reduce drásticamente el tiempo de "tengo una idea" a "tengo algo funcional". Si combinas Bolt.new para el prototipo inicial con Claude Code para el desarrollo serio, tienes un flujo de trabajo potentísimo.\`
   },
   {
     slug: "cursor-rules",
@@ -109,20 +112,20 @@ Bolt.new es impresionante como demostración tecnológica y genuinamente útil p
     category: "Herramientas dev",
     url: "https://github.com/PatrickJS/awesome-cursorrules",
     clonableWithCode: true,
-    summary: "Las Cursor Rules son archivos de configuración que le dicen a la IA de Cursor cómo debe generar código en TU proyecto: qué convenciones seguir, qué versiones usar, qué patrones respetar. La comunidad ha creado cientos de reglas optimizadas por stack.\n\nEs la diferencia entre una IA que genera código genérico y una que genera código que encaja perfectamente en tu proyecto.",
-    fullContent: `## El problema que resuelven
+    summary: "Las Cursor Rules son archivos de configuración que le dicen a la IA de Cursor cómo debe generar código en TU proyecto: qué convenciones seguir, qué versiones usar, qué patrones respetar. La comunidad ha creado cientos de reglas optimizadas por stack.\\n\\nEs la diferencia entre una IA que genera código genérico y una que genera código que encaja perfectamente en tu proyecto.",
+    fullContent: \`## El problema que resuelven
 
 Cuando usas Cursor (o cualquier editor con IA), el modelo de lenguaje no sabe nada sobre tu proyecto específico. No sabe que usas Tailwind v4, que prefieres Server Components, que tu equipo nombra las variables en camelCase, o que tu API sigue el patrón Repository. El resultado: código genérico que tienes que adaptar manualmente cada vez.
 
-Las Cursor Rules solucionan esto con un archivo \`.cursorrules\` en la raíz de tu proyecto que contextualiza al modelo. Es como darle un manual de estilo a un nuevo desarrollador que se une al equipo.
+Las Cursor Rules solucionan esto con un archivo \\\`.cursorrules\\\` en la raíz de tu proyecto que contextualiza al modelo. Es como darle un manual de estilo a un nuevo desarrollador que se une al equipo.
 
 ## Cómo funcionan
 
 ### El archivo .cursorrules
 
-Creas un archivo \`.cursorrules\` en la raíz de tu proyecto con instrucciones en lenguaje natural:
+Creas un archivo \\\`.cursorrules\\\` en la raíz de tu proyecto con instrucciones en lenguaje natural:
 
-\`\`\`
+\\\`\\\`\\\`
 # Stack
 - Next.js 15 con App Router
 - Tailwind CSS v4 (usar @theme en vez de tailwind.config)
@@ -148,7 +151,7 @@ Creas un archivo \`.cursorrules\` en la raíz de tu proyecto con instrucciones e
 - Usar las CSS variables del tema (--accent, --muted, --surface, etc.)
 - Espaciado consistente: py-8 sm:py-12 para páginas
 - Contenedor: mx-auto max-w-7xl px-4 sm:px-6 lg:px-8
-\`\`\`
+\\\`\\\`\\\`
 
 Con esto, cada vez que le pidas a Cursor que genere código, lo hará siguiendo estas reglas. En vez de código genérico, obtienes código que encaja en tu proyecto.
 
@@ -182,20 +185,20 @@ A medida que añades reglas ("no uses esta librería, usa esta otra", "siempre m
 
 No necesitas Cursor para beneficiarte de esta idea. Puedes crear el equivalente para Claude Code:
 
-\`\`\`bash
+\\\`\\\`\\\`bash
 # Crea un archivo CLAUDE.md en la raíz de tu proyecto
 claude "Analiza este proyecto y genera un CLAUDE.md con:
 - Stack técnico detectado
 - Convenciones de código que observas
 - Patrones arquitectónicos que se usan
 - Reglas específicas para generar código consistente"
-\`\`\`
+\\\`\\\`\\\`
 
 Claude Code lee el archivo CLAUDE.md automáticamente y lo usa como contexto. Es el equivalente exacto de las Cursor Rules pero para Claude Code.
 
 ## Reglas que recomiendo para cualquier proyecto
 
-\`\`\`
+\\\`\\\`\\\`
 # Obligatorias
 - Ortografía española perfecta en todos los textos (tildes, eñes, ¿, ¡)
 - Slugs sin acentos ni caracteres especiales
@@ -209,11 +212,11 @@ Claude Code lee el archivo CLAUDE.md automáticamente y lo usa como contexto. Es
 - Nombres descriptivos (getUserById en vez de getUsr)
 - Tests para lógica de negocio crítica
 - Variables de entorno para configuración
-\`\`\`
+\\\`\\\`\\\`
 
 ## Veredicto
 
-Las Cursor Rules (y su equivalente CLAUDE.md para Claude Code) son una de esas cosas pequeñas que tienen un impacto enorme en la productividad. Pasas 30 minutos definiendo las reglas y ahorras horas de ajustes manuales en cada sesión de código con IA. Si usas cualquier editor con IA y no tienes un archivo de reglas, estás dejando dinero en la mesa.`
+Las Cursor Rules (y su equivalente CLAUDE.md para Claude Code) son una de esas cosas pequeñas que tienen un impacto enorme en la productividad. Pasas 30 minutos definiendo las reglas y ahorras horas de ajustes manuales en cada sesión de código con IA. Si usas cualquier editor con IA y no tienes un archivo de reglas, estás dejando dinero en la mesa.\`
   },
   {
     slug: "screen-studio-alternativa",
@@ -222,8 +225,8 @@ Las Cursor Rules (y su equivalente CLAUDE.md para Claude Code) son una de esas c
     category: "Productividad",
     url: "https://obsproject.com",
     clonableWithCode: false,
-    summary: "Screen Studio revolucionó la grabación de pantalla con zoom automático al cursor, fondos bonitos y edición inteligente. Pero cuesta 89$ (pago único). Con OBS (gratuito) + herramientas de IA + un poco de post-producción, puedes conseguir un resultado muy similar sin pagar nada.\n\nEsta guía te enseña el setup completo para grabar tutoriales y demos con calidad profesional usando solo herramientas gratuitas.",
-    fullContent: `## Qué hace Screen Studio (y por qué la gente paga 89$)
+    summary: "Screen Studio revolucionó la grabación de pantalla con zoom automático al cursor, fondos bonitos y edición inteligente. Pero cuesta 89\$ (pago único). Con OBS (gratuito) + herramientas de IA + un poco de post-producción, puedes conseguir un resultado muy similar sin pagar nada.\\n\\nEsta guía te enseña el setup completo para grabar tutoriales y demos con calidad profesional usando solo herramientas gratuitas.",
+    fullContent: \`## Qué hace Screen Studio (y por qué la gente paga 89\$)
 
 Screen Studio es una app de Mac que graba tu pantalla y automáticamente:
 
@@ -232,7 +235,7 @@ Screen Studio es una app de Mac que graba tu pantalla y automáticamente:
 - **Suaviza movimientos**: el cursor se mueve de forma fluida, no a saltos
 - **Exporta en formatos optimizados**: vertical para TikTok, cuadrado para Instagram, 16:9 para YouTube
 
-El resultado son esos vídeos de demos de producto que ves en Twitter que parecen super profesionales. Y la verdad es que Screen Studio es genial. Pero 89$ es mucho para muchos creadores, y solo funciona en Mac.
+El resultado son esos vídeos de demos de producto que ves en Twitter que parecen super profesionales. Y la verdad es que Screen Studio es genial. Pero 89\$ es mucho para muchos creadores, y solo funciona en Mac.
 
 ## La alternativa gratuita: OBS + post-producción con IA
 
@@ -247,13 +250,13 @@ Configuración recomendada para grabaciones tipo Screen Studio:
 - **Formato**: MP4 con codec H.264
 - **Audio**: captura el audio del sistema + tu micrófono
 
-\`\`\`
+\\\`\\\`\\\`
 OBS → Settings → Output:
   Output Mode: Advanced
   Encoder: x264 (o NVENC si tienes GPU NVIDIA)
   Rate Control: CRF
   CRF: 18 (buena calidad)
-\`\`\`
+\\\`\\\`\\\`
 
 ### Paso 2: Zoom automático con herramientas de IA
 
@@ -263,7 +266,7 @@ Aquí es donde entra la IA. Hay varias opciones:
 
 Puedes procesar el vídeo con un script que detecta dónde está el cursor y hace zoom automático:
 
-\`\`\`python
+\\\`\\\`\\\`python
 # Concepto: detectar posición del cursor en cada frame
 # y aplicar crop + scale dinámico con FFmpeg
 import subprocess
@@ -277,7 +280,7 @@ def apply_auto_zoom(input_video, cursor_positions):
             '-ss', str(segment.start), '-t', str(segment.duration),
             f'segment_{segment.id}.mp4'
         ])
-\`\`\`
+\\\`\\\`\\\`
 
 **Opción B: ScreenToGif + edición manual (gratuito, Windows)**
 
@@ -291,18 +294,18 @@ DaVinci Resolve es un editor de vídeo profesional completamente gratuito. Con k
 
 Para el efecto de "ventana flotando sobre fondo bonito":
 
-\`\`\`bash
+\\\`\\\`\\\`bash
 # FFmpeg: añadir padding y fondo de color
-ffmpeg -i grabacion.mp4 \
-  -vf "scale=1600:-1,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=1a1030" \
+ffmpeg -i grabacion.mp4 \\
+  -vf "scale=1600:-1,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=1a1030" \\
   -c:a copy resultado.mp4
-\`\`\`
+\\\`\\\`\\\`
 
 O usa Canva (gratuito) para crear un fondo con gradiente, exportar como imagen, y componer en DaVinci Resolve.
 
 ### Paso 4: Exportar para cada plataforma
 
-\`\`\`bash
+\\\`\\\`\\\`bash
 # YouTube (16:9)
 ffmpeg -i resultado.mp4 -vf "scale=1920:1080" youtube.mp4
 
@@ -310,15 +313,15 @@ ffmpeg -i resultado.mp4 -vf "scale=1920:1080" youtube.mp4
 ffmpeg -i resultado.mp4 -vf "crop=ih*9/16:ih,scale=1080:1920" tiktok.mp4
 
 # Instagram post (1:1)
-ffmpeg -i resultado.mp4 -vf "crop=min(iw\,ih):min(iw\,ih),scale=1080:1080" instagram.mp4
-\`\`\`
+ffmpeg -i resultado.mp4 -vf "crop=min(iw\\,ih):min(iw\\,ih),scale=1080:1080" instagram.mp4
+\\\`\\\`\\\`
 
 ## ¿Merece la pena Screen Studio?
 
-Seamos honestos: Screen Studio hace en 1 clic lo que esta guía hace en 30 minutos de post-producción. Si grabas demos de producto regularmente y tu tiempo vale dinero, los 89$ se amortizan rápido.
+Seamos honestos: Screen Studio hace en 1 clic lo que esta guía hace en 30 minutos de post-producción. Si grabas demos de producto regularmente y tu tiempo vale dinero, los 89\$ se amortizan rápido.
 
 La alternativa OBS + IA tiene sentido si:
-- No puedes (o no quieres) pagar 89$
+- No puedes (o no quieres) pagar 89\$
 - Usas Windows o Linux (Screen Studio es solo Mac)
 - Quieres control total sobre el resultado
 - Grabas esporádicamente, no cada día
@@ -328,7 +331,7 @@ La alternativa OBS + IA tiene sentido si:
 - **OBS Studio**: [obsproject.com](https://obsproject.com) — gratuito, open source
 - **DaVinci Resolve**: [blackmagicdesign.com](https://www.blackmagicdesign.com/products/davinciresolve) — gratuito, profesional
 - **FFmpeg**: herramienta de línea de comandos para procesar vídeo
-- **Canva**: para crear fondos y gráficos — plan gratuito suficiente`
+- **Canva**: para crear fondos y gráficos — plan gratuito suficiente\`
   },
   {
     slug: "languine",
@@ -337,15 +340,15 @@ La alternativa OBS + IA tiene sentido si:
     category: "DevTools",
     url: "https://languine.ai",
     clonableWithCode: true,
-    summary: "Languine automatiza la internacionalización (i18n) de aplicaciones usando IA. En vez de contratar traductores o pasar semanas con archivos JSON de traducciones, ejecutas un comando y tu app está traducida a decenas de idiomas manteniendo el contexto técnico.\n\nEs especialmente útil para startups que quieren lanzar en múltiples mercados sin invertir miles de euros en traducción profesional.",
-    fullContent: `## El dolor de la internacionalización
+    summary: "Languine automatiza la internacionalización (i18n) de aplicaciones usando IA. En vez de contratar traductores o pasar semanas con archivos JSON de traducciones, ejecutas un comando y tu app está traducida a decenas de idiomas manteniendo el contexto técnico.\\n\\nEs especialmente útil para startups que quieren lanzar en múltiples mercados sin invertir miles de euros en traducción profesional.",
+    fullContent: \`## El dolor de la internacionalización
 
 Si alguna vez has internacionalizado una aplicación web, conoces el infierno:
 
 1. Extraes todas las cadenas de texto del código a archivos JSON/YAML
 2. Envías esos archivos a un traductor (o los traduces tú con Google Translate)
 3. Las traducciones vuelven con errores de contexto ("Log in" traducido como "Registro" en vez de "Iniciar sesión")
-4. Las variables dinámicas se rompen (\`{count} items\` → \`{count} artículos\` pero en alemán el orden es diferente)
+4. Las variables dinámicas se rompen (\\\`{count} items\\\` → \\\`{count} artículos\\\` pero en alemán el orden es diferente)
 5. Cada vez que añades una nueva cadena de texto, el ciclo se repite
 6. Mantener 20 idiomas sincronizados es una pesadilla logística
 
@@ -355,9 +358,9 @@ El resultado: la mayoría de startups lanzan solo en inglés y español "para em
 
 Languine conecta con los archivos de traducción de tu proyecto (JSON, YAML, .po, .xliff, .ts...) y usa modelos de lenguaje para traducir manteniendo el contexto:
 
-\`\`\`bash
+\\\`\\\`\\\`bash
 npx languine translate --target=fr,de,ja,ko,pt,it,zh
-\`\`\`
+\\\`\\\`\\\`
 
 Un comando. Tu app traducida a 7 idiomas. En minutos, no en semanas.
 
@@ -366,7 +369,7 @@ Un comando. Tu app traducida a 7 idiomas. En minutos, no en semanas.
 Languine no es un traductor genérico. Entiende que está traduciendo una **aplicación**:
 
 - **Contexto técnico**: sabe que "Dashboard" en una app no se traduce literalmente
-- **Variables**: mantiene \`{userName}\` y \`{count}\` intactos en todas las traducciones
+- **Variables**: mantiene \\\`{userName}\\\` y \\\`{count}\\\` intactos en todas las traducciones
 - **Pluralizaciones**: maneja las reglas de plural de cada idioma (en ruso hay 3 formas de plural, en árabe hay 6)
 - **Longitud**: intenta mantener traducciones de longitud similar para que la UI no se rompa
 - **Consistencia**: traduce "Save" siempre como "Guardar" en toda la app, no a veces como "Salvar"
@@ -374,16 +377,16 @@ Languine no es un traductor genérico. Entiende que está traduciendo una **apli
 
 ### Flujo de trabajo real
 
-\`\`\`
+\\\`\\\`\\\`
 1. Desarrollas tu app en inglés (o español)
 2. Tus cadenas de texto están en archivos i18n estándar
-3. Ejecutas languine translate
+3. Ejecutas \`languine translate\`
 4. Languine genera los archivos de traducción para cada idioma
 5. Revisas las traducciones (o las envías a un nativo para revisión rápida)
 6. Commit y deploy — tu app es multiidioma
-\`\`\`
+\\\`\\\`\\\`
 
-Cuando añades nuevas cadenas de texto, ejecutas \`languine translate\` de nuevo y solo traduce lo nuevo, manteniendo lo existente intacto.
+Cuando añades nuevas cadenas de texto, ejecutas \\\`languine translate\\\` de nuevo y solo traduce lo nuevo, manteniendo lo existente intacto.
 
 ## Números que importan
 
@@ -401,13 +404,13 @@ La calidad no es idéntica a un traductor nativo profesional, especialmente para
 
 Si no quieres usar Languine específicamente, puedes replicar el concepto con Claude Code:
 
-\`\`\`bash
+\\\`\\\`\\\`bash
 claude "Lee todos los archivos de traducción en /locales/en/.
 Para cada archivo, genera la traducción a español (es), francés (fr),
 alemán (de) y japonés (ja). Mantén las claves exactas, las variables
 entre llaves, y adapta el tono al contexto de una aplicación web.
 Guarda cada traducción en /locales/{idioma}/ con el mismo nombre de archivo."
-\`\`\`
+\\\`\\\`\\\`
 
 Claude Code leerá tus archivos, entenderá el contexto y generará las traducciones. No tiene la integración automatizada de Languine (detección de cambios, CI/CD, etc.) pero el resultado de traducción es comparable o mejor, porque Claude es excelente con idiomas.
 
@@ -420,7 +423,7 @@ Claude Code leerá tus archivos, entenderá el contexto y generará las traducci
 
 ## Veredicto
 
-Languine no reemplaza a un traductor profesional para contenido marketing o legal donde cada palabra importa. Pero para la UI de una aplicación — botones, menús, mensajes, formularios — produce traducciones perfectamente usables en una fracción del tiempo y coste. Es la diferencia entre lanzar en 2 idiomas o en 20.`
+Languine no reemplaza a un traductor profesional para contenido marketing o legal donde cada palabra importa. Pero para la UI de una aplicación — botones, menús, mensajes, formularios — produce traducciones perfectamente usables en una fracción del tiempo y coste. Es la diferencia entre lanzar en 2 idiomas o en 20.\`
   },
   {
     slug: "inbox-zero",
@@ -429,15 +432,15 @@ Languine no reemplaza a un traductor profesional para contenido marketing o lega
     category: "Productividad",
     url: "https://getinboxzero.com",
     clonableWithCode: true,
-    summary: "Inbox Zero es un cliente de email open source que usa IA para lo que todos queremos pero nadie ha conseguido de verdad: mantener la bandeja de entrada a cero. Auto-categoriza emails, se desuscribe de newsletters que no lees, responde emails rutinarios, y te presenta solo lo que necesita tu atención.\n\nEs open source, se conecta a Gmail, y puedes self-hostearlo para que ninguna IA externa lea tus correos.",
-    fullContent: `## El problema universal
+    summary: "Inbox Zero es un cliente de email open source que usa IA para lo que todos queremos pero nadie ha conseguido de verdad: mantener la bandeja de entrada a cero. Auto-categoriza emails, se desuscribe de newsletters que no lees, responde emails rutinarios, y te presenta solo lo que necesita tu atención.\\n\\nEs open source, se conecta a Gmail, y puedes self-hostearlo para que ninguna IA externa lea tus correos.",
+    fullContent: \`## El problema universal
 
 Todo el mundo tiene el mismo problema con el email: recibes 50-200 emails al día, el 80% son irrelevantes (newsletters que no lees, notificaciones automáticas, CC en hilos que no te afectan, spam que pasa el filtro), y los emails que SÍ importan se pierden entre el ruido.
 
 Las soluciones existentes no funcionan:
 - **Filtros de Gmail**: requieren configuración manual y se quedan obsoletos
-- **Superhuman**: 30$/mes por un cliente de email bonito (sí, treinta dólares por leer correo)
-- **SaneBox**: 7$/mes por filtrado inteligente, pero tus emails pasan por sus servidores
+- **Superhuman**: 30\$/mes por un cliente de email bonito (sí, treinta dólares por leer correo)
+- **SaneBox**: 7\$/mes por filtrado inteligente, pero tus emails pasan por sus servidores
 - **La fuerza de voluntad**: "Esta vez sí que voy a mantener mi bandeja a cero" (spoiler: no)
 
 Inbox Zero quiere resolver esto con IA, de forma open source y transparente.
@@ -489,7 +492,7 @@ Aun así, si manejas información muy sensible (legal, médica, financiera), pi�
 
 La idea de Inbox Zero es replicable a menor escala con un script:
 
-\`\`\`python
+\\\`\\\`\\\`python
 # Concepto: script que categoriza tu email cada mañana
 import imaplib
 import anthropic
@@ -520,18 +523,22 @@ def categorize_inbox():
 
         # 4. Mover a carpeta según categoría
         if category == "IGNORAR":
-            mail.store(msg_id, '+FLAGS', '\\Seen')
+            mail.store(msg_id, '+FLAGS', '\\\\Seen')
             mail.move(msg_id, 'Archivo')
-\`\`\`
+\\\`\\\`\\\`
 
 Con Claude Code puedes construir esto en una tarde y ejecutarlo con un cron cada mañana. No tendrás la interfaz bonita de Inbox Zero pero sí la funcionalidad core.
 
 ## Veredicto
 
-Inbox Zero es uno de esos proyectos que atacan un problema que todos tenemos. El enfoque open source + IA es correcto, y la posibilidad de self-hosting lo hace viable para gente preocupada por la privacidad. ¿Es perfecto? No — la IA todavía se equivoca clasificando emails ambiguos, y las respuestas automáticas necesitan supervisión. Pero como asistente que pre-procesa tu bandeja y reduce el ruido, funciona sorprendentemente bien.`
+Inbox Zero es uno de esos proyectos que atacan un problema que todos tenemos. El enfoque open source + IA es correcto, y la posibilidad de self-hosting lo hace viable para gente preocupada por la privacidad. ¿Es perfecto? No — la IA todavía se equivoca clasificando emails ambiguos, y las respuestas automáticas necesitan supervisión. Pero como asistente que pre-procesa tu bandeja y reduce el ruido, funciona sorprendentemente bien.\`
   },
 ];
 
 export function getNovedadBySlug(slug: string) {
   return novedades.find((n) => n.slug === slug) ?? null;
 }
+`;
+
+fs.writeFileSync("/Users/guillermodelpinohernandez/Documents/offroad/apps/web/src/lib/novedades-data.ts", content);
+console.log("✅ novedades-data.ts reescrito con contenido extenso");
