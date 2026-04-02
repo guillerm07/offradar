@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowLeft, Star, ExternalLink, ArrowRight, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Star, ExternalLink, ArrowRight, AlertTriangle, Check, X } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import ScoreRing from "@/components/ui/ScoreRing";
 import { formatNumber, getDifficultyColor, getDifficultyLabel } from "@/lib/utils";
@@ -153,9 +153,9 @@ export default async function AlternativaDetailPage({ params }: Props) {
                   <ScoreRing score={project.interestScore ?? 0} size={46} className="shrink-0" />
                 </div>
 
-                <p className="mt-3 text-sm text-muted leading-relaxed line-clamp-3">
+                <p className="mt-3 text-sm text-muted leading-relaxed">
                   {project.summaryEs
-                    ? project.summaryEs.split("\n")[0]
+                    ? project.summaryEs.split("\n").slice(0, 2).join(" ").slice(0, 400) + (project.summaryEs.length > 400 ? "..." : "")
                     : project.description}
                 </p>
 
@@ -183,10 +183,50 @@ export default async function AlternativaDetailPage({ params }: Props) {
         ))}
       </div>
 
+      {/* What you gain/lose */}
+      {product.whatYouGain && product.whatYouGain.length > 0 && (
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="rounded-xl border border-success/20 bg-success/5 p-6">
+            <h3 className="text-base font-bold text-success mb-4">
+              ✓ Lo que ganas con la alternativa
+            </h3>
+            <ul className="space-y-3">
+              {product.whatYouGain.map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5">
+                  <Check className="h-4 w-4 text-success shrink-0 mt-0.5" />
+                  <span className="text-sm text-muted leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-xl border border-danger/20 bg-danger/5 p-6">
+            <h3 className="text-base font-bold text-danger mb-4">
+              ✗ Lo que pierdes al cambiar
+            </h3>
+            <ul className="space-y-3">
+              {product.whatYouLose.map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5">
+                  <X className="h-4 w-4 text-danger shrink-0 mt-0.5" />
+                  <span className="text-sm text-muted leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Detailed comparison */}
+      {product.detailedComparison && (
+        <div className="mt-8 rounded-xl border border-border bg-surface p-6">
+          <h3 className="text-base font-bold mb-3">El veredicto</h3>
+          <p className="text-sm text-muted leading-relaxed">{product.detailedComparison}</p>
+        </div>
+      )}
+
       {/* Conclusion text */}
       {product.conclusionText && (
-        <div className="mt-10 rounded-xl border border-border bg-surface p-6">
-          <h3 className="text-base font-bold mb-3">Nuestra recomendación</h3>
+        <div className="mt-6 rounded-xl border border-accent/20 bg-accent-soft/30 p-6">
+          <h3 className="text-base font-bold mb-3 text-accent">Nuestra recomendación</h3>
           <p className="text-sm text-muted leading-relaxed">{product.conclusionText}</p>
         </div>
       )}
