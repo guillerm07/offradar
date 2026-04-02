@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { subscribers } from "@/db/schema";
 
 export async function POST(request: NextRequest) {
   try {
@@ -6,21 +8,23 @@ export async function POST(request: NextRequest) {
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json(
-        { error: "Email invalido" },
+        { error: "Email inválido" },
         { status: 400 }
       );
     }
 
-    // TODO: When DB is connected, insert into subscribers table
-    // For now, just return success
-    // import { db } from "@/lib/db";
-    // import { subscribers } from "@/db/schema";
-    // await db.insert(subscribers).values({ email }).onConflictDoNothing();
+    const normalized = email.toLowerCase().trim();
 
-    console.log(`[Newsletter] Nuevo suscriptor: ${email}`);
+    await db
+      .insert(subscribers)
+      .values({ email: normalized })
+      .onConflictDoNothing();
+
+    console.log(`[Newsletter] Nuevo suscriptor: ${normalized}`);
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (e) {
+    console.error("[Newsletter] Error:", e);
     return NextResponse.json(
       { error: "Error interno" },
       { status: 500 }

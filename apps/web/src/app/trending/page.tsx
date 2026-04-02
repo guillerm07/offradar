@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { TrendingUp, Flame, Clock, Star } from "lucide-react";
 import ProjectCard from "@/components/project/ProjectCard";
-import { getPublishedProjects } from "@/lib/queries";
+import { getPublishedProjects, type SortOption } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Trending — Proyectos tech del momento",
@@ -12,8 +12,26 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function TrendingPage() {
-  const projects = await getPublishedProjects(30);
+const tabs = [
+  { label: "Más relevantes", sort: "interest", icon: Flame },
+  { label: "Más estrellas", sort: "stars", icon: Star },
+  { label: "Más recientes", sort: "recent", icon: Clock },
+  { label: "Mayor crecimiento", sort: "trending", icon: TrendingUp },
+] as const;
+
+type Props = {
+  searchParams: Promise<{ sort?: string }>;
+};
+
+export default async function TrendingPage({ searchParams }: Props) {
+  const { sort } = await searchParams;
+  const currentSort: SortOption =
+    sort === "stars" || sort === "recent" || sort === "trending"
+      ? sort
+      : "interest";
+
+  const projects = await getPublishedProjects(30, currentSort);
+
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="mb-10">
@@ -33,23 +51,19 @@ export default async function TrendingPage() {
 
       {/* Filter tabs */}
       <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-2">
-        {[
-          { label: "Hoy", icon: Flame, active: true },
-          { label: "Esta semana", icon: TrendingUp, active: false },
-          { label: "Recientes", icon: Clock, active: false },
-          { label: "Más estrellas", icon: Star, active: false },
-        ].map((tab) => (
-          <button
-            key={tab.label}
+        {tabs.map((tab) => (
+          <Link
+            key={tab.sort}
+            href={`/trending?sort=${tab.sort}`}
             className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium border transition-colors ${
-              tab.active
+              currentSort === tab.sort
                 ? "bg-accent text-white border-accent"
                 : "bg-surface text-muted border-border hover:border-accent/30 hover:text-foreground"
             }`}
           >
             <tab.icon className="h-4 w-4" />
             {tab.label}
-          </button>
+          </Link>
         ))}
       </div>
 

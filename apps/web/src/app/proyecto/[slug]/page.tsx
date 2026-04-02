@@ -68,6 +68,27 @@ export default async function ProjectPage({ params }: Props) {
         Volver a trending
       </Link>
 
+      {/* Schema markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: project.name,
+            description: project.seoDescription || project.description,
+            url: project.url,
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Cross-platform",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+            ...(project.featuredImageUrl && { image: project.featuredImageUrl }),
+            ...(project.author && {
+              author: { "@type": "Person", name: project.author },
+            }),
+          }),
+        }}
+      />
+
       {/* Featured image */}
       {project.featuredImageUrl ? (
         <div className="relative aspect-[2/1] overflow-hidden rounded-2xl bg-surface-hover mb-8">

@@ -11,8 +11,8 @@ import {
   GitCompare,
   FileText,
   Mail,
-  Search,
 } from "lucide-react";
+import SearchDialog from "@/components/ui/SearchDialog";
 
 const navigation = [
   { name: "Trending", href: "/trending", icon: TrendingUp },
@@ -55,12 +55,7 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            <button
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition-colors hover:text-foreground hover:bg-surface-hover"
-              aria-label="Buscar"
-            >
-              <Search className="h-4.5 w-4.5" />
-            </button>
+            <SearchDialog />
 
             <Link
               href="/newsletter"

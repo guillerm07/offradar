@@ -1,12 +1,54 @@
 import { db } from "@/lib/db";
 import { projects, categories } from "@/db/schema";
-import { eq, desc, and, sql } from "drizzle-orm";
+import { eq, desc, and, sql, isNotNull, ilike, or } from "drizzle-orm";
 
-export async function getPublishedProjects(limit = 30) {
+export type SortOption = "interest" | "stars" | "recent" | "trending";
+
+export async function getPublishedProjects(limit = 30, sort: SortOption = "interest") {
+  const orderCol =
+    sort === "stars" ? desc(projects.stars) :
+    sort === "recent" ? desc(projects.createdAt) :
+    sort === "trending" ? desc(projects.trendingVelocity) :
+    desc(projects.interestScore);
+
   return db
     .select()
     .from(projects)
     .where(eq(projects.status, "published"))
+    .orderBy(orderCol)
+    .limit(limit);
+}
+
+export async function searchProjects(query: string, limit = 30) {
+  const pattern = `%${query}%`;
+  return db
+    .select()
+    .from(projects)
+    .where(
+      and(
+        eq(projects.status, "published"),
+        or(
+          ilike(projects.name, pattern),
+          ilike(projects.description, pattern),
+          ilike(projects.summaryEs, pattern),
+          ilike(projects.seoTitle, pattern),
+        )
+      )
+    )
+    .orderBy(desc(projects.interestScore))
+    .limit(limit);
+}
+
+export async function getProjectsWithClaudeCode(limit = 30) {
+  return db
+    .select()
+    .from(projects)
+    .where(
+      and(
+        eq(projects.status, "published"),
+        isNotNull(projects.replicableWithCode)
+      )
+    )
     .orderBy(desc(projects.interestScore))
     .limit(limit);
 }
