@@ -18,7 +18,11 @@ export const automations: Automation[] = [
     description: "Uno de los workflows más populares de n8n genera vídeos automáticamente: coge un tema de un Google Sheet, genera el guión con GPT, crea el vídeo con IA y lo sube a TikTok, YouTube e Instagram.",
     withCode: "Con Claude Code puedes construir un script Python que haga exactamente lo mismo sin n8n ni nodos visuales.",
     originalUrl: "https://n8n.io/workflows/5338",
-    fullGuide: `## Qué hace el workflow original
+    fullGuide: `## Por qué esta automatización es tan popular
+
+La creación de vídeos cortos es el formato de contenido que más crece en internet. TikTok, YouTube Shorts e Instagram Reels acumulan miles de millones de vistas diarias, y los creadores que publican con consistencia pueden generar ingresos significativos. El problema es que producir un vídeo — incluso uno simple — lleva tiempo: pensar el tema, escribir el guión, buscar imágenes, grabar la voz, montar el vídeo, añadir subtítulos. Esta automatización elimina todo ese trabajo manual.
+
+## Qué hace el workflow original
 
 El template de n8n más viral del momento automatiza la creación de vídeos cortos para redes sociales. El flujo es:
 
@@ -100,7 +104,11 @@ Usa las APIs oficiales de cada plataforma o herramientas como \`yt-dlp\` para la
 
 ## Tiempo estimado de construcción
 
-Con Claude Code, montar el script completo lleva unas 2-3 horas la primera vez. Después, generar cada vídeo es cuestión de minutos.`,
+Con Claude Code, montar el script completo lleva unas 2-3 horas la primera vez. Después, generar cada vídeo es cuestión de minutos.
+
+## Una reflexión honesta
+
+Esta automatización puede producir contenido a escala, pero eso no significa que debas publicar vídeos genéricos de IA sin ningún toque personal. Los algoritmos de las plataformas cada vez penalizan más el contenido 100% generado por IA. Lo ideal es usar esta herramienta como **punto de partida**: genera el borrador y luego añade tu perspectiva, edita el guión, o graba tu propia voz. El contenido que combina eficiencia de IA con autenticidad humana es el que realmente funciona a largo plazo.`,
   },
   {
     slug: "chatbot-whatsapp-rag",
@@ -110,7 +118,11 @@ Con Claude Code, montar el script completo lleva unas 2-3 horas la primera vez. 
     description: "Un workflow que conecta WhatsApp Business con un agente de IA que consulta tus documentos para responder preguntas de clientes automáticamente.",
     withCode: "Con Claude Code puedes montar un servidor que reciba webhooks de WhatsApp y responda con Claude consultando tus documentos.",
     originalUrl: "https://n8n.io/workflows/4827",
-    fullGuide: `## El caso de uso
+    fullGuide: `## Por qué un chatbot de WhatsApp con IA es tan valioso
+
+WhatsApp es el canal de comunicación dominante en España y Latinoamérica. Tus clientes prefieren escribirte por WhatsApp antes que llamar, enviar un email, o buscar en tu web. Pero responder WhatsApp manualmente no escala: cada minuto que un agente humano pasa respondiendo "¿cuál es vuestro horario?" es un minuto que no dedica a consultas complejas que realmente necesitan un humano. Un chatbot con RAG (Retrieval Augmented Generation) resuelve esto: responde el 70-80% de las consultas automáticamente consultando tu documentación, y escala al equipo humano solo cuando no sabe la respuesta.
+
+## El caso de uso
 
 Tienes una empresa con documentación de producto (FAQs, manuales, políticas de devolución, guías). Tus clientes te escriben por WhatsApp con preguntas repetitivas que podrían responderse consultando esa documentación. Quieres un chatbot que lea tus documentos y responda automáticamente en WhatsApp.
 
@@ -208,7 +220,14 @@ async def generate_response(question, context):
 
 ## Tiempo estimado
 
-Con Claude Code, montar todo el sistema lleva una tarde. La parte más lenta es preparar y limpiar tus documentos para que el RAG funcione bien.`,
+Con Claude Code, montar todo el sistema lleva una tarde. La parte más lenta es preparar y limpiar tus documentos para que el RAG funcione bien.
+
+## Consejos para que funcione bien
+
+- **Prepara bien tus documentos**: el RAG es tan bueno como la información que le das. Asegúrate de que tus FAQs están actualizadas y cubren las preguntas más frecuentes
+- **Configura un fallback claro**: cuando el bot no sabe algo, que diga "No tengo esa información, pero te paso con un agente" en vez de inventarse una respuesta
+- **Empieza con un scope limitado**: primero solo FAQs, luego añade documentación de producto, después políticas de devolución. Ir paso a paso
+- **Monitoriza las conversaciones**: revisa periódicamente qué pregunta la gente y qué responde el bot para detectar errores y mejorar los documentos`,
   },
   {
     slug: "publicacion-automatica-linkedin",
@@ -218,7 +237,11 @@ Con Claude Code, montar todo el sistema lleva una tarde. La parte más lenta es 
     description: "Un flujo que genera contenido para LinkedIn automáticamente con GPT-4 y DALL-E, programado para publicar en los mejores horarios.",
     withCode: "Con Claude Code creas un script que genera posts con Claude, imágenes con Gemini, y publica con la API de LinkedIn.",
     originalUrl: "https://n8n.io/workflows/4968",
-    fullGuide: `## Qué hace el workflow original
+    fullGuide: `## Por qué automatizar LinkedIn
+
+LinkedIn es la red profesional con más impacto para generar oportunidades de negocio, construir marca personal y atraer talento. Pero publicar con consistencia es agotador: pensar un tema, escribir un post, crear una imagen, publicar en el horario correcto... muchos profesionales empiezan con motivación y abandonan en 2 semanas. La automatización no reemplaza tu voz, pero elimina la fricción de producir contenido regularmente.
+
+## Qué hace el workflow original
 
 El template de n8n automatiza la creación y publicación de contenido en LinkedIn:
 1. Se activa según un schedule (ej: lunes, miércoles y viernes a las 9:00)
@@ -307,7 +330,15 @@ Cada día programado, el script:
 
 **Coste**: prácticamente cero (unos céntimos por post en APIs de IA).
 
-**Tiempo de construcción**: 1-2 horas con Claude Code.`,
+**Tiempo de construcción**: 1-2 horas con Claude Code.
+
+## Consejos para que funcione de verdad
+
+- **No publiques sin revisar**: la IA genera borradores, tú pones la autenticidad. Revisa cada post antes de publicar y añade tu toque personal
+- **Define temas de antemano**: crea una lista de 20-30 temas que dominas y que interesan a tu audiencia. El script rota entre ellos
+- **Mezcla con contenido manual**: los posts 100% IA se notan. Alterna posts automáticos con posts escritos por ti que cuenten experiencias reales
+- **Mide resultados**: LinkedIn te da métricas de impresiones, engagement y clics. Usa esos datos para ajustar los temas y el tono del prompt
+- **Horario importa**: martes a jueves entre 8:00-10:00 y 17:00-18:00 son los horarios con más engagement en LinkedIn España`,
   },
   {
     slug: "monitor-precios-telegram",
@@ -317,7 +348,11 @@ Cada día programado, el script:
     description: "Visita periódicamente webs de tiendas, extrae precios, y te avisa por Telegram cuando bajan.",
     withCode: "Con Claude Code + Playwright creas un monitor que funciona sin selectores CSS frágiles.",
     originalUrl: null,
-    fullGuide: `## El problema
+    fullGuide: `## Por qué necesitas un monitor de precios propio
+
+Los precios online cambian constantemente — Amazon puede cambiar el precio de un producto varias veces al día. Las extensiones de navegador como Keepa o CamelCamelCamel funcionan, pero solo para Amazon y con limitaciones. Si quieres monitorizar precios en PCComponentes, MediaMarkt, Booking, o cualquier otra web, necesitas tu propio monitor. Y con IA, puedes hacerlo sin los selectores CSS frágiles que se rompen cada semana.
+
+## El problema
 
 Quieres comprar algo (unos auriculares, un portátil, un vuelo) pero el precio actual es demasiado alto. Quieres que alguien vigile el precio y te avise cuando baje.
 
@@ -415,7 +450,15 @@ Un monitor de precios personalizado que:
 - Funciona sin depender de ningún servicio externo
 - Se ejecuta con un cron en tu servidor o tu propio ordenador
 
-**Tiempo de construcción**: 1 hora con Claude Code.`,
+**Tiempo de construcción**: 1 hora con Claude Code.
+
+## Ideas para extenderlo
+
+- **Historial visual**: guarda los precios en SQLite y genera un gráfico con matplotlib para ver la tendencia
+- **Múltiples tiendas**: monitoriza el mismo producto en Amazon, PCComponentes y MediaMarkt y compara cuál está más barato
+- **Alertas inteligentes**: en vez de avisar solo cuando baja, avisa cuando está en el precio más bajo de los últimos 30 días
+- **Dashboard web**: con Flask o Streamlit, crea una web simple donde ver todos los precios monitorizados
+- **Compartir con amigos**: monta un bot de Telegram donde la gente puede añadir productos y todos reciben alertas`,
   },
   {
     slug: "resumen-noticias-diario",
@@ -425,7 +468,11 @@ Un monitor de precios personalizado que:
     description: "Recopila noticias de RSS, las resume con IA, y te envía un briefing cada mañana.",
     withCode: "Con Claude Code construyes un script que lee feeds RSS, resume con Claude, y envía con Resend.",
     originalUrl: null,
-    fullGuide: `## La idea
+    fullGuide: `## Por qué un briefing personalizado con IA es mejor que leer el feed de Twitter
+
+La forma en que la mayoría de gente tech se mantiene informada es ineficiente: abrir Twitter/X, scroll infinito entre memes, opiniones y alguna noticia real. O abrir 10 webs de noticias y leer titulares. Un briefing por email te da exactamente lo que necesitas en 2 minutos, sin distracciones, sin scroll infinito, y con un resumen que va al grano. Y con IA, el resumen no es un corta-pega de titulares — es una síntesis inteligente que conecta las noticias y te dice por qué importan.
+
+## La idea
 
 Cada mañana recibes un email personalizado con las noticias más importantes del día de tus fuentes favoritas, resumidas por IA para que en 2 minutos estés al día.
 
@@ -536,7 +583,15 @@ Lo bueno de hacerlo con código es que puedes personalizar todo:
 - **Resend**: gratis hasta 3.000 emails/mes
 - **Total**: menos de 1€/mes por un briefing diario personalizado
 
-**Tiempo de construcción**: 30 minutos con Claude Code.`,
+**Tiempo de construcción**: 30 minutos con Claude Code.
+
+## Ideas para hacerlo aún mejor
+
+- **Filtro de relevancia**: antes de resumir, pide a Claude que puntúe cada noticia del 1-10 en relevancia para tu perfil profesional y solo incluya las que superen un 7
+- **Briefing por categorías**: separa las noticias en secciones: IA, desarrollo, negocio, open source
+- **Versión Telegram**: en vez de (o además de) email, envía el briefing a un canal de Telegram
+- **Análisis de tendencias**: cada viernes, genera un "resumen de la semana" que conecta las noticias y detecta tendencias
+- **Compartir con tu equipo**: monta un briefing de equipo con fuentes relevantes para tu empresa`,
   },
 ];
 
