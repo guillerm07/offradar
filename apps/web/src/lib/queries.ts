@@ -59,9 +59,10 @@ export async function getFilteredProjects(filters: FilterOptions, limit = 30) {
 
 export async function getDistinctLanguages() {
   const results = await db.execute(sql`
-    SELECT DISTINCT language, COUNT(*)::int as count
+    SELECT language, COUNT(*)::int as count
     FROM projects
     WHERE status = 'published' AND language IS NOT NULL
+    GROUP BY language
     ORDER BY count DESC
   `);
   return results as unknown as Array<{ language: string; count: number }>;
