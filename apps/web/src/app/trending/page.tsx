@@ -13,10 +13,12 @@ import ProjectCard from "@/components/project/ProjectCard";
 import CollapsibleFilters from "@/components/ui/CollapsibleFilters";
 import {
   getFilteredProjects,
+  countFilteredProjects,
   getCategories,
   getDistinctLanguages,
   type SortOption,
 } from "@/lib/queries";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Trending — Proyectos tech del momento",
@@ -39,6 +41,8 @@ const difficultyOptions = [
   { value: "dificil", label: "Difícil", color: "text-danger border-danger/20 bg-danger/10" },
 ];
 
+const PER_PAGE = 24;
+
 type Props = {
   searchParams: Promise<{
     sort?: string;
@@ -46,6 +50,7 @@ type Props = {
     difficulty?: string;
     language?: string;
     alt?: string;
+    page?: string;
   }>;
 };
 
@@ -61,19 +66,24 @@ export default async function TrendingPage({ searchParams }: Props) {
   const currentDifficulty = params.difficulty || undefined;
   const currentLanguage = params.language || undefined;
   const currentAlt = params.alt === "1";
+  const currentPage = Math.max(1, parseInt(params.page || "1", 10));
 
   const hasFilters = !!(currentCategory || currentDifficulty || currentLanguage || currentAlt);
 
-  const projects = await getFilteredProjects(
-    {
-      sort: currentSort,
-      category: currentCategory,
-      difficulty: currentDifficulty,
-      language: currentLanguage,
-      alternativeOnly: currentAlt,
-    },
-    30
-  );
+  const filterOpts = {
+    sort: currentSort,
+    category: currentCategory,
+    difficulty: currentDifficulty,
+    language: currentLanguage,
+    alternativeOnly: currentAlt,
+  };
+
+  const [projects, totalCount] = await Promise.all([
+    getFilteredProjects(filterOpts, PER_PAGE, (currentPage - 1) * PER_PAGE),
+    countFilteredProjects(filterOpts),
+  ]);
+
+  const totalPages = Math.ceil(totalCount / PER_PAGE);
 
   const dbCategories = await getCategories();
   const languages = await getDistinctLanguages();
@@ -85,6 +95,7 @@ export default async function TrendingPage({ searchParams }: Props) {
     if (params.difficulty) base.difficulty = params.difficulty;
     if (params.language) base.language = params.language;
     if (params.alt) base.alt = params.alt;
+    if (params.page && params.page !== "1") base.page = params.page;
 
     const merged = { ...base, ...overrides };
     // Remove undefined/empty values
@@ -278,18 +289,60 @@ export default async function TrendingPage({ searchParams }: Props) {
       {/* Results count */}
       <div className="flex items-center justify-between mb-6">
         <p className="text-sm text-muted">
-          {projects.length} {projects.length === 1 ? "proyecto encontrado" : "proyectos encontrados"}
+          {totalCount} {totalCount === 1 ? "proyecto encontrado" : "proyectos encontrados"}
           {hasFilters && " con los filtros aplicados"}
+          {totalPages > 1 && ` — Página ${currentPage} de ${totalPages}`}
         </p>
       </div>
 
       {/* Project grid */}
       {projects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+            {projects.map((project, i) => (
+              <ProjectCard key={project.id} project={project} index={i + (currentPage - 1) * PER_PAGE} />
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <nav className="mt-10 flex items-center justify-center gap-2">
+              {currentPage > 1 && (
+                <Link
+                  href={buildUrl({ page: currentPage === 2 ? undefined : String(currentPage - 1) })}
+                  className="flex h-10 items-center gap-1.5 rounded-lg border border-border bg-surface px-4 text-sm font-medium transition-colors hover:border-accent/30 hover:text-foreground"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Anterior
+                </Link>
+              )}
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Link
+                  key={page}
+                  href={buildUrl({ page: page === 1 ? undefined : String(page) })}
+                  className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium transition-colors ${
+                    page === currentPage
+                      ? "bg-accent text-white"
+                      : "border border-border bg-surface text-muted hover:border-accent/30 hover:text-foreground"
+                  }`}
+                >
+                  {page}
+                </Link>
+              ))}
+
+              {currentPage < totalPages && (
+                <Link
+                  href={buildUrl({ page: String(currentPage + 1) })}
+                  className="flex h-10 items-center gap-1.5 rounded-lg border border-border bg-surface px-4 text-sm font-medium transition-colors hover:border-accent/30 hover:text-foreground"
+                >
+                  Siguiente
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              )}
+            </nav>
+          )}
+        </>
       ) : (
         <div className="rounded-2xl border border-border bg-surface p-12 text-center">
           <p className="text-lg font-bold mb-2">No se encontraron proyectos</p>

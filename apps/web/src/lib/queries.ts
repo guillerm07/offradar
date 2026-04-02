@@ -27,7 +27,21 @@ export async function getPublishedProjects(limit = 30, sort: SortOption = "inter
     .limit(limit);
 }
 
-export async function getFilteredProjects(filters: FilterOptions, limit = 30) {
+export async function countFilteredProjects(filters: FilterOptions) {
+  const conditions = [eq(projects.status, "published")];
+  if (filters.category) conditions.push(eq(projects.categoryId, filters.category));
+  if (filters.difficulty) conditions.push(sql`${projects.difficulty} = ${filters.difficulty}`);
+  if (filters.language) conditions.push(eq(projects.language, filters.language));
+  if (filters.alternativeOnly) conditions.push(eq(projects.isOssAlternative, true));
+
+  const result = await db
+    .select({ count: sql<number>`COUNT(*)::int` })
+    .from(projects)
+    .where(and(...conditions));
+  return result[0].count;
+}
+
+export async function getFilteredProjects(filters: FilterOptions, limit = 30, offset = 0) {
   const orderCol =
     filters.sort === "stars" ? desc(projects.stars) :
     filters.sort === "recent" ? desc(projects.createdAt) :
@@ -54,7 +68,8 @@ export async function getFilteredProjects(filters: FilterOptions, limit = 30) {
     .from(projects)
     .where(and(...conditions))
     .orderBy(orderCol)
-    .limit(limit);
+    .limit(limit)
+    .offset(offset);
 }
 
 export async function getDistinctLanguages() {
